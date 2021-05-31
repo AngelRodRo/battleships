@@ -18,7 +18,7 @@
     props: {
       matrix: {
         type: Array,
-        default: []
+        default: () => []
       }
     }
   }
