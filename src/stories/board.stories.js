@@ -6,5 +6,16 @@ export default {
 
 export const Default = () => ({
   components: { Board },
-  template: '<board></board>'
+  data: () => {
+    return {
+      matrix: [
+        [0, 1, 1, 1, 1],
+        [0, 1, 1, 0, 0],
+        [0, 1, 1, 0, 0],
+        [0, 1, 1, 0, 0],
+        [0, 1, 1, 0, 0] 
+      ] 
+    }
+  },
+  template: '<board :matrix="matrix"></board>'
 })
