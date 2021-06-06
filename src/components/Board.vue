@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="Board">
     <div
+      v-for="(element1, idx1) in matrix"
+      class="Board__row"
       :key="idx1"
-      v-for="(element1, idx1) in matrix">
+    >
       <div
+        v-for="(element2, idx2) in element1"
+        class="Board__col"
         :key="idx2"
-        v-for="(element2, idx2) in element1[idx1]"
       >
       </div>
     </div>
@@ -23,7 +26,19 @@
     }
   }
 </script>
+<style lang="scss">
+  * {
+    box-sizing: border-box;
+  }
+  .Board {
+    &__row {
+      display: flex;
+      height: 100px;
+    }
 
-<style>
-
+    &__col {
+      width: 100px;
+      border: 1px solid black;
+    }
+  }
 </style>
