@@ -1,27 +1,61 @@
 <template>
   <div class="Board">
-    <div
-      v-for="(element1, idx1) in matrix"
-      class="Board__row"
-      :key="idx1"
+    <template
+      v-for="(element1, idx1) in board"
     >
-      <div
+      <template
         v-for="(element2, idx2) in element1"
-        class="Board__col"
-        :key="idx2"
       >
-      </div>
-    </div>
+        <Blank
+          :positions="[idx1, idx2]"
+          :key="`${idx1}${idx2}`"
+          v-if="!element2"
+        />
+      </template>
+    </template>
+    <Battleship 
+      v-for="battleship in battleships"
+      :key="battleship.id"
+      :id="battleship.id"
+      :positions="battleship.positions"
+      @select="handleSelect"
+    />
   </div>
  
 </template>
 <script>
+
+  import Battleship from './Battleship.vue';
+  import Blank from './Blank.vue';
+
+  import { generateBattleShipsOnBoard } from '../utils/battleship';
+
   export default {
     name: 'Board',
-    props: {
-      matrix: {
-        type: Array,
-        default: () => []
+    components: {
+      Battleship,
+      Blank,
+    },
+    data() {
+      return {
+        board: [],
+        battleships: [],
+        positions: [],
+      };
+    },
+    created() {
+      const { board, battleships, positions } = generateBattleShipsOnBoard();
+      
+      this.board = board;
+      console.log(board)
+      this.battleships = battleships;
+      this.positions = positions;
+    },
+    methods: {
+      handleSelect({id , row , col}) {
+        const battleship = this.battleships.find(battleship => battleship.id === id);
+        this.$set(battleship.positions, `${row}${col}`, false);
+        // battleship.positions[`${row}${col}`] = false;
       }
     }
   }
@@ -31,14 +65,6 @@
     box-sizing: border-box;
   }
   .Board {
-    &__row {
-      display: flex;
-      height: 100px;
-    }
-
-    &__col {
-      width: 100px;
-      border: 1px solid black;
-    }
+    position: relative;
   }
 </style>
