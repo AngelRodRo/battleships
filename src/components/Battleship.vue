@@ -53,7 +53,7 @@
           arr.push({
             row,
             col,
-            state: !!this.positions[position],
+            state: this.positions[position],
           });
         }
 
