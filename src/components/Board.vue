@@ -25,12 +25,15 @@
 </template>
 <script>
 
-  import { mapState } from 'vuex';
+  import { mapState, mapActions } from 'vuex';
 
-  import Battleship from './Battleship.vue';
-  import Blank from './Blank.vue';
+  import Battleship from '@/components/Battleship.vue';
+  import Blank from '@/components/Blank.vue';
 
-  import { generateBattleShipsOnBoard } from '../utils/battleship';
+  import { 
+    generateBattleShipsOnBoard,
+    saveGameProgress
+  } from '../utils/battleship';
 
   export default {
     name: 'Board',
@@ -40,12 +43,11 @@
     },
     computed: {
       ...mapState({
+        shots: state => state.user.shots,
         turns: state => state.user.turns,
       }),
       positionsAvailable() {
-
         let positions = []
-
         this.battleships.forEach(battleship => {
           for (const key in battleship.positions) {
             if (Object.hasOwnProperty.call(battleship.positions, key)) {
@@ -68,6 +70,21 @@
       turns(val) {
         if (val === 0) {
           alert('You lose');
+          saveGameProgress({
+            shots: this.shots,
+            turns: this.turns,
+            isWinner: false,
+          });
+        }
+      },
+      hasWon(val) {
+        if (val) {
+          alert('You win!');
+          saveGameProgress({
+            shots: this.shots,
+            turns: this.turns,
+            isWinner: true,
+          });
         }
       }
     },
@@ -83,8 +100,14 @@
       this.battleships = battleships;
     },
     methods: {
+      ...mapActions({
+        increaseShots: 'increaseShots'
+      }),
       handleSelect({ id , row , col }) {
         const battleship = this.battleships.find(battleship => battleship.id === id);
+        if (battleship.positions[`${row}${col}`]) {
+          this.increaseShots();
+        }
         this.$set(battleship.positions, `${row}${col}`, false);
       }
     }

@@ -117,3 +117,19 @@ export const generateBattleShipsOnBoard = () => {
     battleships,
   };
 }
+
+export const saveGameProgress = ({ turns, isWinner }) => {
+  let history = [];
+
+  if (localStorage.getItem('history')) {
+    history = JSON.parse(localStorage.getItem('history'));
+  }
+
+  history.push({
+    turns,
+    isWinner,
+    date: new Date(),
+  });
+
+  localStorage.setItem('history', JSON.stringify(history));
+}

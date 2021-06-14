@@ -37,11 +37,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      decreaseTurns: 'decreaseTurns'
+      decreaseTurns: 'decreaseTurns',
+      increaseShots: 'increaseShots'
     }),
     changeStatus() {
       if (!this.selected) {
         this.decreaseTurns();
+        this.increaseShots();
       }
       this.selected = true;
     }
