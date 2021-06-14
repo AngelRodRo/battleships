@@ -25,6 +25,8 @@
 </template>
 <script>
 
+  import { mapState } from 'vuex';
+
   import Battleship from './Battleship.vue';
   import Blank from './Blank.vue';
 
@@ -36,26 +38,54 @@
       Battleship,
       Blank,
     },
+    computed: {
+      ...mapState({
+        turns: state => state.user.turns,
+      }),
+      positionsAvailable() {
+
+        let positions = []
+
+        this.battleships.forEach(battleship => {
+          for (const key in battleship.positions) {
+            if (Object.hasOwnProperty.call(battleship.positions, key)) {
+              const isAvailable = battleship.positions[key];
+              positions.push(isAvailable);
+            }
+          }
+        });
+
+        return positions;
+      },
+      hasWon() {
+        return !this.positionsAvailable.reduce((prev, currentValue) => {
+          return prev || currentValue;
+        }, false);
+      }
+      
+    },
+    watch:{
+      turns(val) {
+        if (val === 0) {
+          alert('You lose');
+        }
+      }
+    },
     data() {
       return {
         board: [],
         battleships: [],
-        positions: [],
       };
     },
     created() {
-      const { board, battleships, positions } = generateBattleShipsOnBoard();
-      
+      const { board, battleships } = generateBattleShipsOnBoard();
       this.board = board;
-      console.log(board)
       this.battleships = battleships;
-      this.positions = positions;
     },
     methods: {
-      handleSelect({id , row , col}) {
+      handleSelect({ id , row , col }) {
         const battleship = this.battleships.find(battleship => battleship.id === id);
         this.$set(battleship.positions, `${row}${col}`, false);
-        // battleship.positions[`${row}${col}`] = false;
       }
     }
   }

@@ -86,7 +86,7 @@ const createBattleship = ({
     }
     positionsDictionary = {
       ...positionsDictionary,
-      [direction === 'h'?  `${row}${element}` : `${element}${col}`]: id,
+      [direction === 'h'?  `${row}${element}` : `${element}${col}`]: true,
     }
   }
 
@@ -99,7 +99,6 @@ const createBattleship = ({
 
 export const generateBattleShipsOnBoard = () => {
   let battleships = [];
-  let battleshipPositionMap = {};
   const constraints = [
     [1, 4],
     [2, 3],
@@ -113,16 +112,8 @@ export const generateBattleShipsOnBoard = () => {
     }
   })
 
-  battleships.forEach(({ positions }) => { // eslint-disable-line
-    battleshipPositionMap = {
-      ...battleshipPositionMap,
-      ...positions,
-    }
-  });
-
   return {
     board,
     battleships,
-    positions: battleshipPositionMap,
   };
 }

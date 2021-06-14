@@ -1,8 +1,17 @@
 <template>
-  <div class="Blank" :style="positionStyles"></div>
+  <div
+    class="Blank"
+    :class="{ 'Blank--selected': selected }"
+    :style="positionStyles"
+    @click="changeStatus"
+  >
+  </div>
 </template>
 
 <script>
+
+import { mapActions } from 'vuex';
+
 export default {
   props: {
     positions: {
@@ -10,7 +19,13 @@ export default {
       default: () => {}
     }
   },
+  data() {
+    return {
+      selected: false,
+    }
+  },
   computed: {
+    
     positionStyles() {
       const [row, col] = this.positions;
       
@@ -20,6 +35,17 @@ export default {
       }
     }
   },
+  methods: {
+    ...mapActions({
+      decreaseTurns: 'decreaseTurns'
+    }),
+    changeStatus() {
+      if (!this.selected) {
+        this.decreaseTurns();
+      }
+      this.selected = true;
+    }
+  }
 }
 </script>
 
@@ -29,5 +55,9 @@ export default {
     height: 100px;
     position: absolute;
     border: 1px solid black;
+
+    &--selected {
+      background: gray;
+    }
   }
 </style>
