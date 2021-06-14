@@ -93,10 +93,11 @@ const createBattleship = ({
   return {
     id,
     positions: positionsDictionary,
+    size,
   };
 }
 
-const generateBattleShipsOnBoard = () => {
+export const generateBattleShipsOnBoard = () => {
   let battleships = [];
   let battleshipPositionMap = {};
   const constraints = [
@@ -112,14 +113,16 @@ const generateBattleShipsOnBoard = () => {
     }
   })
 
-  battleships.forEach(({ positions }) => {
+  battleships.forEach(({ positions }) => { // eslint-disable-line
     battleshipPositionMap = {
       ...battleshipPositionMap,
       ...positions,
     }
   });
 
-  return board;
+  return {
+    board,
+    battleships,
+    positions: battleshipPositionMap,
+  };
 }
-
-console.log(generateBattleShipsOnBoard())

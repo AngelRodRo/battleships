@@ -11,8 +11,11 @@
     "clean:install": "del-cli node_modules && del-cli yarn.lock && yarn"
   },
   "dependencies": {
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
+    "@vue/babel-preset-jsx": "^1.2.4",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-fragment": "^1.5.2",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
