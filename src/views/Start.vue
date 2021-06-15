@@ -44,14 +44,16 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    padding: 10px;
     &__button {
       width: 200px;
       height: 50px;
+
+      margin-left: 8px !important;
     }
 
     &__container {
-      width: 500px;
+      max-width: 500px;
       
       align-self: center;
     }
