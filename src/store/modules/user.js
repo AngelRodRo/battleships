@@ -1,6 +1,6 @@
 export default {
   state: {
-    turns: 0,
+    turns: null,
     shots: 0,
   },
   mutations: {
@@ -13,7 +13,7 @@ export default {
   },
   actions: {
     decreaseTurns({ commit, state }) {
-      commit('SET_TURNS', state.turns - 1);
+      commit('SET_TURNS', (state.turns || 0) - 1);
     },
     increaseShots({ commit, state }) {
       commit('SET_SHOTS', state.shots + 1);
