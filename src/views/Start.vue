@@ -1,12 +1,17 @@
 <template>
-  <div>
-    <div>
-      <input v-model="turns" type="text">
-      <button @click="$router.push('/board')">Ok</button>
+  <div class="Start">
+    <h1>Battleships game!</h1>
+    <div class="Start__container">
+      <md-field>
+        <md-input placeholder="Ingrese el nro de turnos" v-model="turns" type="text" />
+        <md-button class="md-raised md-primary" @click="$router.push('/board')">Ok</md-button>
+      </md-field>
+      <div class="Start__options">
+        <md-button class="Start__button md-raised md-primary" @click="setTurn(null)">Facil</md-button>
+        <md-button class="Start__button md-raised md-primary" @click="setTurn(100)">Medio</md-button>
+        <md-button class="Start__button md-raised md-primary" @click="setTurn(50)">Dificil</md-button>
+      </div>
     </div>
-    <button @click="setTurn(null)">Facil</button>
-    <button @click="setTurn(100)">Medio</button>
-    <button @click="setTurn(50)">Dificil</button>
   </div>
 </template>
 
@@ -27,13 +32,28 @@ export default {
       },
 
       set(val) {
-        this.$store.commit('SET_TURNS', val);
+        this.$store.commit('SET_TURNS', Number(val));
       }
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+  .Start {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
+    &__button {
+      width: 200px;
+      height: 50px;
+    }
+
+    &__container {
+      width: 500px;
+      
+      align-self: center;
+    }
+  }
 </style>
