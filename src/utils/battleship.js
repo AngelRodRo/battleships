@@ -119,7 +119,7 @@ export const generateBattleShipsOnBoard = () => {
   };
 }
 
-export const saveGameProgress = ({ turns, isWinner }) => {
+export const saveGameProgress = ({ shots, turns, isWinner }) => {
   let history = [];
 
   if (localStorage.getItem('history')) {
@@ -127,6 +127,7 @@ export const saveGameProgress = ({ turns, isWinner }) => {
   }
 
   history.push({
+    shots,
     turns,
     isWinner,
     date: new Date(),
@@ -134,3 +135,4 @@ export const saveGameProgress = ({ turns, isWinner }) => {
 
   localStorage.setItem('history', JSON.stringify(history));
 }
+

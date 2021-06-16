@@ -140,6 +140,9 @@
         this.$store.commit('SET_TURNS', this.initialTurns);
         this.$store.commit('SET_SHOTS', 0);
       },
+      isAlreadySetup() {
+        return !!this.turns;
+      },
       startSettings() {
         const { board, battleships } = generateBattleShipsOnBoard();
         this.board = board;
