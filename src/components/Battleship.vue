@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <div v-frag>
     <template
       v-for="(position, idx) in positionsArr"
     >
@@ -26,15 +26,18 @@
         :class="{ 'Battleship--drowned': isDrowned }"
       />
     </template>
-  </fragment>
+  </div>
 </template>
 
 <script>
-  import { Fragment } from 'vue-fragment'
+  import frag from 'vue-frag';
+  import { SQUARE_SIZE } from '@/constants';
 
   export default {
     name: 'battleship',
-    components: { Fragment },
+    directives: {
+      frag
+    },
     props: {
       id: {
         type: String,
@@ -68,8 +71,8 @@
     methods: {
       positionStyles(row, col) {
         return {
-          top: `${row * 100}px`,
-          left: `${col * 100}px`
+          top: `${row * SQUARE_SIZE}px`,
+          left: `${col * SQUARE_SIZE}px`
         }
       }
     }
@@ -77,9 +80,12 @@
 </script>
 
 <style lang="scss">
+
+  @import "../assets/css/constants.scss";
+
   .Battleship {
-    width: 100px;
-    height: 100px;
+    width: $size_square;
+    height: $size_square;
     position: absolute;
     border: 1px solid black;
 

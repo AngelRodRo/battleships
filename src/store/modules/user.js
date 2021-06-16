@@ -1,5 +1,6 @@
 export default {
   state: {
+    initialTurns: null,
     turns: null,
     shots: 0,
   },
@@ -17,6 +18,12 @@ export default {
     },
     increaseShots({ commit, state }) {
       commit('SET_SHOTS', state.shots + 1);
+    },
+    resetShots({ commit }) {
+      commit('SET_SHOTS', 0);
+    },
+    resetTurns({ commit }) {
+      commit('SET_TURNS', 0);
     }
   },
 }

@@ -4,7 +4,7 @@
     <div class="Start__container">
       <md-field>
         <md-input placeholder="Ingrese el nro de turnos" v-model="turns" type="text" />
-        <md-button class="md-raised md-primary" @click="$router.push('/board')">Ok</md-button>
+        <md-button class="md-raised md-primary" @click="goToBoard">Ok</md-button>
       </md-field>
       <div class="Start__options">
         <md-button class="Start__button md-raised md-primary" @click="setTurn(null)">Facil</md-button>
@@ -21,7 +21,10 @@ export default {
   name: 'Start',
   methods: {
     setTurn(value){ 
-      this.$store.commit('SET_TURNS', value);
+      this.$store.commit('SET_TURNS', Number(value));
+      this.goToBoard();
+    },
+    goToBoard() {
       this.$router.push('/board');
     }
   },

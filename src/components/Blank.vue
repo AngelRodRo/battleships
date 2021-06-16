@@ -12,6 +12,8 @@
 
 import { mapActions } from 'vuex';
 
+import { SQUARE_SIZE } from '@/constants';
+
 export default {
   props: {
     positions: {
@@ -30,8 +32,8 @@ export default {
       const [row, col] = this.positions;
       
       return {
-        top: `${row * 100}px`,
-        left: `${col * 100}px`
+        top: `${row * SQUARE_SIZE}px`,
+        left: `${col * SQUARE_SIZE}px`
       }
     }
   },
@@ -52,9 +54,11 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "../assets/css/constants.scss";
+
   .Blank {
-    width: 100px;
-    height: 100px;
+    width: $size_square;
+    height: $size_square;
     position: absolute;
     border: 1px solid black;
 

@@ -1,30 +1,48 @@
 <template>
-  <div class="Board">
-    <template
-      v-for="(element1, idx1) in board"
-    >
+  <div v-if="showBoard" class="Board">
+    <div class="Board__container"> 
       <template
-        v-for="(element2, idx2) in element1"
+        v-for="(element1, idx1) in board"
       >
-        <Blank
-          :positions="[idx1, idx2]"
-          :key="`${idx1}${idx2}`"
-          v-if="!element2"
-        />
+        <template
+          v-for="(element2, idx2) in element1"
+        >
+          <Blank
+            :positions="[idx1, idx2]"
+            :key="`${idx1}${idx2}`"
+            v-if="!element2"
+          />
+        </template>
       </template>
-    </template>
-    <Battleship 
-      v-for="battleship in battleships"
-      :key="battleship.id"
-      :id="battleship.id"
-      :positions="battleship.positions"
-      @select="handleSelect"
-    />
+      <Battleship 
+        v-for="battleship in battleships"
+        :key="battleship.id"
+        :id="battleship.id"
+        :positions="battleship.positions"
+        @select="handleSelect"
+      />
+      
+      <div
+        v-for="(element1, idx) in board"
+        :key="idx + 'ab'"
+        class="Board__letters"
+        :style="getLetterPosition(idx)"
+      >
+        {{letters[idx]}}
+      </div>
+
+      <div
+        v-for="(element1, idx) in board"
+        :key="idx + '1a'"
+        class="Board__numbers"
+        :style="getNumberPosition(idx)"
+      >
+        {{idx + 1}}
+      </div>
+    </div>
   </div>
- 
 </template>
 <script>
-
   import { mapState, mapActions } from 'vuex';
 
   import Battleship from '@/components/Battleship.vue';
@@ -67,9 +85,21 @@
       
     },
     watch:{
-      turns(val) {
+      async turns(val) {
         if (val === 0) {
-          alert('You lose');
+          const result = await this.$swal({
+            title: 'Quieres intentarlo de nuevo?',
+            showDenyButton: true,
+            confirmButtonText: `Si`,
+            denyButtonText: `No`,
+          });
+
+          if (result.isConfirmed) {
+            this.resetGame();
+          } else {
+            this.goToHome();
+          }
+
           saveGameProgress({
             shots: this.shots,
             turns: this.turns,
@@ -92,32 +122,80 @@
       return {
         board: [],
         battleships: [],
+        letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
+        initialTurns: 0,
+        showBoard: true,
       };
     },
     created() {
-      const { board, battleships } = generateBattleShipsOnBoard();
-      this.board = board;
-      this.battleships = battleships;
+      this.startSettings();
+      this.initialTurns = +`${this.turns}`;
     },
     methods: {
       ...mapActions({
         increaseShots: 'increaseShots'
       }),
+      resetGame() {
+        this.startSettings();
+        this.$store.commit('SET_TURNS', this.initialTurns);
+        this.$store.commit('SET_SHOTS', 0);
+      },
+      startSettings() {
+        const { board, battleships } = generateBattleShipsOnBoard();
+        this.board = board;
+        this.battleships = battleships;
+
+        this.showBoard = false;
+        this.$nextTick(() => {
+          this.showBoard = true;
+        });
+      },
       handleSelect({ id , row , col }) {
         const battleship = this.battleships.find(battleship => battleship.id === id);
         if (battleship.positions[`${row}${col}`]) {
           this.increaseShots();
         }
         this.$set(battleship.positions, `${row}${col}`, false);
+      },
+      getLetterPosition(index) {
+        return {
+          top: `${index * 75}px`
+        }
+      },
+      getNumberPosition(index) {
+        return {
+          left: `${index * 75 + 15}px`
+        }
+      },
+      goToHome() {
+        this.$router.push('/')
       }
     }
   }
 </script>
 <style lang="scss">
-  * {
-    box-sizing: border-box;
-  }
   .Board {
-    position: relative;
+    display: flex;
+    justify-content: center;
+    &__container {
+      position: relative;
+      width: 750px;
+      height: 750px;
+      background: white;
+      margin-top: 75px;
+    }
+
+    &__letters {
+      position: absolute;
+      margin-left: -50px;
+      font-size: 40px;
+      margin-top: 25px;
+    }
+
+    &__numbers {
+      position: absolute;
+      font-size: 40px;
+      margin-top: -50px;
+    }
   }
 </style>
