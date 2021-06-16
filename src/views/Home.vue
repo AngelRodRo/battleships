@@ -1,8 +1,17 @@
 <template>
   <div class="home">
-
-    {{turns}}
-    {{shots}}
+    <h1 style="padding-top: 40px; margin: 0">Battleships game!</h1>
+    <div class="home__statics">
+      <div class="home__turns">
+        <span>Turnos restantes: </span>
+        {{turns}}
+      </div>
+      <div class="home__shots">
+        <span>Tiros : </span>
+        {{shots}}
+      </div>
+    </div>
+    
     <Board />
   </div>
 </template>
@@ -28,3 +37,22 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .home {
+    background: #b4ecead9;
+    height: 100vh;
+
+    &__statics {
+      display: flex;
+      font-size: 30px;
+      margin-top: 35px;
+      justify-content: center;
+    }
+
+    &__turns,
+    &__shots {
+      margin-left: 15px;
+      margin-bottom: 15px;
+    }
+  }
+</style>

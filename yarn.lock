@@ -11718,6 +11718,11 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sweetalert2@10.x:
+  version "10.16.9"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.16.9.tgz#8ed86f2fa811a136667a48357e204348705be8c9"
+  integrity sha512-oNe+md5tmmS3fGfVHa7gVPlun7Td2oANSacnZCeghnrr3OHBi6UPVPU+GFrymwaDqwQspACilLRmRnM7aTjNPA==
+
 symbol.prototype.description@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/symbol.prototype.description/-/symbol.prototype.description-1.0.4.tgz#c30edd3fe8c040d941cf7dc15842be15adf66855"
@@ -12545,6 +12550,11 @@ vue-eslint-parser@^7.0.0:
     esquery "^1.4.0"
     lodash "^4.17.15"
 
+vue-frag@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/vue-frag/-/vue-frag-1.1.5.tgz#1158f92361dff2c312e00b8ca85334c329e566e7"
+  integrity sha512-g+PP9pjW1gnrmPjy2Sa5jK/bfxYHK8Hgt1sVs/Y/7KT+srGJUwtGNwXNTUvWv/zJ2yGcvJVEH98eIrICyZX9Ng==
+
 vue-fragment@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/vue-fragment/-/vue-fragment-1.5.2.tgz#310017170c564c4aad95da14c185c92c6784fd3c"
@@ -12625,6 +12635,13 @@ vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
+
+vue-sweetalert2@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/vue-sweetalert2/-/vue-sweetalert2-4.3.1.tgz#b8111344fa48c011a9b2fb9acfb797ddf65ccda4"
+  integrity sha512-4ZsCpBupG9Q6RJsJ4z/+VkXp0+u5nWz9Z+TcsBU7sS7T47E/ZN3kZSwpCV1F+GdVzurYDcXNcKiwjQ3g7uXzqw==
+  dependencies:
+    sweetalert2 "10.x"
 
 vue-template-compiler@^2.6.11:
   version "2.6.14"
