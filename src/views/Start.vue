@@ -3,11 +3,11 @@
     <h1>Battleships game!</h1>
     <div class="Start__container">
       <md-field>
-        <md-input placeholder="Ingrese el nro de turnos" v-model="turns" type="text" />
-        <md-button class="md-raised md-primary" @click="goToBoard">Ok</md-button>
+        <md-input required placeholder="Ingrese el nro de turnos" v-model="turns" type="number" />
+        <md-button :disabled="!turns" class="md-raised md-primary" @click="goToBoard">Ok</md-button>
       </md-field>
       <div class="Start__options">
-        <md-button class="Start__button md-raised md-primary" @click="setTurn(null)">Facil</md-button>
+        <md-button class="Start__button md-raised md-primary" @click="setTurn('infinite')">Facil</md-button>
         <md-button class="Start__button md-raised md-primary" @click="setTurn(100)">Medio</md-button>
         <md-button class="Start__button md-raised md-primary" @click="setTurn(50)">Dificil</md-button>
       </div>
@@ -21,7 +21,7 @@ export default {
   name: 'Start',
   methods: {
     setTurn(value){ 
-      this.$store.commit('SET_TURNS', Number(value));
+      this.$store.commit('SET_TURNS', value !== 'infinite'? Number(value) : value);
       this.goToBoard();
     },
     goToBoard() {

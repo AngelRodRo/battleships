@@ -2,7 +2,7 @@
   <div class="home">
     <h1 style="padding-top: 40px; margin: 0">Battleships game!</h1>
     <div class="home__statics">
-      <div class="home__turns">
+      <div v-if="turns !== 'infinite'" class="home__turns">
         <span>Turnos restantes: </span>
         {{turns}}
       </div>
@@ -11,7 +11,9 @@
         {{shots}}
       </div>
     </div>
-    
+    <md-button @click="goToHistory" class="home__button md-raised md-primary">
+      Historial
+    </md-button>
     <Board />
   </div>
 </template>
@@ -34,6 +36,11 @@ export default {
       turns: state => state.user.turns,
       shots: state => state.user.shots,
     })
+  },
+  methods: {
+    goToHistory() {
+      this.$router.push('/historial')
+    }
   }
 }
 </script>
@@ -41,6 +48,15 @@ export default {
   .home {
     background: #b4ecead9;
     height: 100vh;
+
+    &__button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+
+      width: 200px;
+      height: 50px;
+    }
 
     &__statics {
       display: flex;

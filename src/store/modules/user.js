@@ -14,7 +14,9 @@ export default {
   },
   actions: {
     decreaseTurns({ commit, state }) {
-      commit('SET_TURNS', (state.turns || 0) - 1);
+      if (state.turns !== 'infinite') {
+        commit('SET_TURNS', (state.turns || 0) - 1);
+      }
     },
     increaseShots({ commit, state }) {
       commit('SET_SHOTS', state.shots + 1);
