@@ -28,4 +28,4 @@ export default {
       commit('SET_TURNS', 0);
     }
   },
-}
+};
