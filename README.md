@@ -46,9 +46,9 @@ When you shot in a blank square:
 
 ![shot-on-blank](/public/images/shot-on-blank.png)
 
-When you drowned a ship:
+When you sink a ship:
 
-![drowned-ship](/public/images/drowned-ship.png)
+![sink-ship](/public/images/sink-ship.png)
 
 Here you can see the statitics of the game (shots and remaining attempts):
 
