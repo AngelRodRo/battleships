@@ -34,7 +34,25 @@ npm run lint
 
 1. Select your game mode: 
 
+![Home](/public/images/start.png)
 
+2. Do a click on any square on the board. When you click, you can see some states:
+
+When you shot in a part of ship:
+
+![shot-on-ship](/public/images/shot-on-ship.png)
+
+When you shot in a blank square:
+
+![shot-on-blank](/public/images/shot-on-blank.png)
+
+When you drowned a ship:
+
+![drowned-ship](/public/images/drowned-ship.png)
+
+Here you can see the statitics of the game (shots and remaining attempts):
+
+![statitics-ship](/public/images/statitics-game.png)
 
 ## ❗ Issues
 
