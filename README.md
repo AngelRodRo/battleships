@@ -25,6 +25,8 @@ npm run serve
 
 The `npm run serve` command execute for default in port `8080`, change in `vue.config.js` file if you has this port on use.
 
+Also, you can check deployed app on: https://jovial-jackson-5401be.netlify.app/
+
 ### Lints and fixes files
 ```
 npm run lint
