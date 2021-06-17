@@ -24,13 +24,13 @@ const routes = [
     name: 'History',
     component: History
   },
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/board') {
@@ -44,6 +44,6 @@ router.beforeEach((to, from, next) => {
   }
 
   next();
-})
+});
 
-export default router
+export default router;
