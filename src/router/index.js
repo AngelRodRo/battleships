@@ -1,12 +1,12 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Start from '../views/Start.vue'
-import History from '../views/History.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
+import Start from '../views/Start.vue';
+import History from '../views/History.vue';
 
-import store from '../store'
+import store from '../store';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
